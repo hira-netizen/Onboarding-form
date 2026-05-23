@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Let's Get Started — Digitally Empower</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fdfbf7;
+  --surface: #ffffff;
+  --border: #e8e2d9;
+  --border-focus: #9b7ebd;
+  --ink: #1c1a24;
+  --muted: #8a8499;
+  --soft: #5c5870;
+  --plum: #9b7ebd;
+  --plum-light: rgba(155,126,189,0.12);
+  --gold: #c9973a;
+  --gold-light: rgba(201,151,58,0.1);
+  --warm: #f5f0e8;
+  --success: #5a9e7c;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  min-height:100vh;
+  font-size:15px;
+  line-height:1.7;
+}
+
+/* ── Hero ── */
+.hero{
+  background:var(--ink);
+  padding:80px 24px 72px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:'';position:absolute;
+  bottom:-1px;left:0;right:0;height:40px;
+  background:var(--bg);
+  clip-path:ellipse(55% 100% at 50% 100%);
+}
+.hero-glow{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:500px;height:300px;
+  background:radial-gradient(ellipse,rgba(155,126,189,0.2) 0%,transparent 70%);
+  pointer-events:none;
+}
+.brand{
+  font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:28px;display:block;
+}
+.hero h1{
+  font-family:'Lora',serif;
+  font-size:clamp(34px,5.5vw,54px);
+  font-weight:400;line-height:1.12;
+  color:#fff;margin-bottom:16px;
+}
+.hero h1 em{font-style:italic;color:#d4a9f5;}
+.hero p{
+  font-size:15px;font-weight:300;
+  color:rgba(255,255,255,0.55);
+  max-width:420px;margin:0 auto;
+}
+
+/* ── Wrap ── */
+.wrap{max-width:680px;margin:0 auto;padding:52px 20px 80px;}
+
+/* ── Progress ── */
+.bar-track{height:3px;background:var(--border);border-radius:10px;margin-bottom:36px;}
+.bar-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--plum),var(--gold));transition:width 0.45s ease;}
+
+/* ── Step dots ── */
+.dots{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:40px;}
+.dot-item{display:flex;align-items:center;}
+.dot{
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;
+  border:2px solid var(--border);
+  color:var(--muted);background:var(--surface);
+  cursor:pointer;transition:all 0.25s;
+  position:relative;
+}
+.dot-label{
+  position:absolute;top:38px;left:50%;transform:translateX(-50%);
+  font-size:9.5px;font-weight:500;letter-spacing:0.04em;
+  color:var(--muted);white-space:nowrap;
+}
+.dot.active{border-color:var(--plum);background:var(--plum);color:#fff;}
+.dot.active .dot-label{color:var(--plum);}
+.dot.done{border-color:var(--success);background:var(--success);color:#fff;}
+.dot.done .dot-label{color:var(--success);}
+.dot-line{width:60px;height:2px;background:var(--border);}
+.dot-line.done{background:var(--success);}
+
+/* ── Card ── */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:44px 48px;
+  display:none;
+  animation:fadeUp 0.32s ease both;
+  box-shadow:0 4px 32px rgba(28,26,36,0.05);
+}
+.card.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+.step-count{font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--plum);margin-bottom:8px;}
+.card-heading{
+  font-family:'Lora',serif;
+  font-size:26px;font-weight:400;
+  color:var(--ink);margin-bottom:6px;line-height:1.25;
+}
+.card-heading em{font-style:italic;color:var(--plum);}
+.card-intro{
+  font-size:13.5px;font-weight:300;color:var(--muted);
+  padding-bottom:24px;margin-bottom:28px;
+  border-bottom:1px solid var(--border);
+  line-height:1.65;
+}
+
+/* ── Fields ── */
+.field{margin-bottom:22px;}
+.field>label{
+  display:block;font-size:13px;font-weight:600;
+  color:var(--soft);margin-bottom:7px;
+}
+.field>label .req{color:var(--gold);margin-left:2px;}
+.field>label .note{
+  display:block;font-weight:300;font-size:12px;
+  color:var(--muted);margin-top:2px;
+}
+input[type=text],input[type=email],input[type=url],
+select,textarea{
+  width:100%;
+  background:var(--warm);
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  padding:12px 16px;
+  font-family:'Nunito',sans-serif;
+  font-size:14px;color:var(--ink);
+  outline:none;
+  transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;
+  -webkit-appearance:none;
+}
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a8499' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  background-color:var(--warm);
+  padding-right:36px;cursor:pointer;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--plum);
+  box-shadow:0 0 0 3px var(--plum-light);
+  background:#fff;
+}
+textarea{resize:vertical;min-height:88px;}
+input::placeholder,textarea::placeholder{color:#c0bac8;}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+
+/* Options */
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opts label{
+  display:flex;align-items:flex-start;gap:11px;
+  padding:11px 16px;
+  border:1.5px solid var(--border);border-radius:10px;
+  cursor:pointer;font-size:14px;font-weight:400;
+  color:var(--soft);background:var(--warm);
+  transition:all 0.18s;
+}
+.opts label:hover{border-color:var(--plum);background:#fff;color:var(--ink);}
+.opts label.on{border-color:var(--plum);background:var(--plum-light);color:var(--ink);font-weight:500;}
+.opts input{margin-top:3px;accent-color:var(--plum);flex-shrink:0;}
+.opts .sub{font-size:11.5px;color:var(--muted);font-weight:300;margin-top:1px;display:block;}
+
+/* Expandable service blocks */
+.svc-block{
+  margin-top:10px;
+  border:1.5px dashed var(--border);
+  border-radius:10px;
+  padding:20px 22px;
+  background:rgba(155,126,189,0.03);
+  display:none;
+}
+.svc-block.open{display:block;animation:fadeUp 0.25s ease both;}
+.svc-block-title{
+  font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--plum);margin-bottom:16px;
+}
+
+/* Dividers */
+.divider{
+  display:flex;align-items:center;gap:12px;margin:28px 0 22px;
+}
+.divider span{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);white-space:nowrap;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* Notice boxes */
+.notice{
+  display:flex;gap:10px;align-items:flex-start;
+  background:var(--gold-light);
+  border:1px solid rgba(201,151,58,0.25);
+  border-radius:10px;padding:14px 16px;
+  font-size:13px;color:#7a5a1a;font-weight:400;
+  margin-bottom:22px;line-height:1.55;
+}
+.notice .ic{flex-shrink:0;margin-top:1px;}
+
+/* Nav */
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:12px;}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:13px 26px;border-radius:10px;
+  font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;
+  cursor:pointer;border:none;transition:all 0.2s;
+}
+.btn-back{background:transparent;border:1.5px solid var(--border);color:var(--muted);}
+.btn-back:hover{border-color:var(--soft);color:var(--soft);}
+.btn-fwd{background:var(--plum);color:#fff;}
+.btn-fwd:hover{background:#8a6dab;transform:translateY(-1px);box-shadow:0 6px 20px rgba(155,126,189,0.3);}
+.btn-send{background:var(--gold);color:#fff;}
+.btn-send:hover{background:#b8862e;transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,151,58,0.3);}
+.btn:disabled{opacity:0.5;cursor:not-allowed;transform:none!important;}
+
+/* Done */
+#done{
+  display:none;text-align:center;
+  padding:72px 40px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:0 4px 32px rgba(28,26,36,0.05);
+  animation:fadeUp 0.4s ease both;
+}
+.done-icon{
+  width:68px;height:68px;border-radius:50%;
+  background:rgba(90,158,124,0.1);border:2px solid var(--success);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin:0 auto 24px;
+}
+#done h2{font-family:'Lora',serif;font-size:32px;font-weight:400;margin-bottom:12px;}
+#done p{color:var(--muted);font-size:14px;font-weight:300;max-width:380px;margin:0 auto 8px;line-height:1.7;}
+#done .sig{
+  font-family:'Lora',serif;font-style:italic;
+  font-size:17px;color:var(--plum);margin-top:24px;
+}
+
+@media(max-width:580px){
+  .card{padding:28px 22px;}
+  .two-col{grid-template-columns:1fr;}
+  .dot-line{width:32px;}
+  .hero{padding:60px 20px 56px;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-glow"></div>
+  <span class="brand">Digitally Empower</span>
+  <h1>So happy you're here —<br>let's <em>get you set up.</em></h1>
+  <p>This is your onboarding form. Fill it in at your own pace — there are no wrong answers, just your vision.</p>
+</div>
+
+<div class="wrap">
+  <div class="bar-track"><div class="bar-fill" id="prog" style="width:20%"></div></div>
+
+  <!-- Step dots -->
+  <div class="dots">
+    <div class="dot-item"><div class="dot active" id="d1" onclick="go(1)">1<span class="dot-label">About You</span></div></div>
+    <div class="dot-line" id="l1"></div>
+    <div class="dot-item"><div class="dot" id="d2" onclick="go(2)">2<span class="dot-label">Your Project</span></div></div>
+    <div class="dot-line" id="l2"></div>
+    <div class="dot-item"><div class="dot" id="d3" onclick="go(3)">3<span class="dot-label">Content</span></div></div>
+    <div class="dot-line" id="l3"></div>
+    <div class="dot-item"><div class="dot" id="d4" onclick="go(4)">4<span class="dot-label">Platforms</span></div></div>
+    <div class="dot-line" id="l4"></div>
+    <div class="dot-item"><div class="dot" id="d5" onclick="go(5)">5<span class="dot-label">Last bits</span></div></div>
+  </div>
+
+  <form id="f" autocomplete="on">
+
+  <!-- ── Step 1 ── -->
+  <div class="card active" id="s1">
+    <div class="step-count">1 of 5</div>
+    <div class="card-heading">First, tell me a little about <em>you.</em></div>
+    <p class="card-intro">Nothing formal here — just the basics so I know who I'm working with and what you're building.</p>
+
+    <div class="two-col">
+      <div class="field">
+        <label>Your name <span class="req">*</span></label>
+        <input type="text" name="name" placeholder="What should I call you?" required>
+      </div>
+      <div class="field">
+        <label>Your business name <span class="req">*</span></label>
+        <input type="text" name="biz_name" placeholder="Your brand or business name" required>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="field">
+        <label>Best email to reach you <span class="req">*</span></label>
+        <input type="email" name="email" placeholder="you@yourbrand.com" required>
+      </div>
+      <div class="field">
+        <label>WhatsApp or phone</label>
+        <input type="text" name="phone" placeholder="+44 or +1...">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Website or social link
+        <span class="note">Wherever you're most active online — website, Instagram, LinkedIn, anything</span>
+      </label>
+      <input type="url" name="website" placeholder="https://...">
+    </div>
+
+    <div class="field">
+      <label>What do you do, and who do you help? <span class="req">*</span>
+        <span class="note">Just talk to me — who are your people and what do you help them with?</span>
+      </label>
+      <textarea name="biz_desc" placeholder="E.g. I'm a health coach helping busy mums rebuild their energy through a structured 8-week programme. I do 1:1 coaching and I'm building my first group offer..." required></textarea>
+    </div>
+
+    <div class="field">
+      <label>Who is your dream client?
+        <span class="note">Paint me a picture — what do they struggle with, what do they want, where are they in their journey?</span>
+      </label>
+      <textarea name="ideal_client" placeholder="E.g. Women in their 40s who've tried everything but feel like the tech side of their business is holding them back. They know their stuff but feel overwhelmed going online..."></textarea>
+    </div>
+
+    <div class="field">
+      <label>What's the big transformation you give people?</label>
+      <textarea name="transformation" placeholder="E.g. My clients go from scattered and invisible to having a real system that works — leads coming in, sales happening, without them being glued to their phone..." style="min-height:75px"></textarea>
+    </div>
+
+    <div class="nav">
+      <div></div>
+      <button type="button" class="btn btn-fwd" onclick="go(2)">Next →</button>
+    </div>
+  </div>
+
+  <!-- ── Step 2 ── -->
+  <div class="card" id="s2">
+    <div class="step-count">2 of 5</div>
+    <div class="card-heading">What are we <em>building together?</em></div>
+    <p class="card-intro">Tick everything that's part of your project. More detail sections will appear as you go — only for what's relevant to you.</p>
+
+    <div class="field">
+      <label>What's included in your project? <span class="req">*</span>
+        <span class="note">Tick all that apply</span>
+      </label>
+      <div class="opts" id="svc-group">
+        <label><input type="checkbox" name="svc[]" value="funnel" onchange="toggleSvc()"> Funnel Build
+          <span class="sub">Landing page, thank you page, full flow</span></label>
+        <label><input type="checkbox" name="svc[]" value="crm" onchange="toggleSvc()"> CRM Setup
+          <span class="sub">Pipelines, contact management, lead tracking</span></label>
+        <label><input type="checkbox" name="svc[]" value="quiz" onchange="toggleSvc()"> Quiz or Lead Magnet
+          <span class="sub">Assessment, quiz funnel, result segmentation</span></label>
+        <label><input type="checkbox" name="svc[]" value="automation" onchange="toggleSvc()"> Email &amp; Marketing Automation
+          <span class="sub">Sequences, workflows, follow-up flows</span></label>
+        <label><input type="checkbox" name="svc[]" value="course" onchange="toggleSvc()"> Course Platform Setup
+          <span class="sub">Kajabi, Teachable, Thinkific or similar</span></label>
+        <label><input type="checkbox" name="svc[]" value="ai_course" onchange="toggleSvc()"> AI-Assisted Course Build
+          <span class="sub">Course structure, modules, AI-generated content</span></label>
+        <label><input type="checkbox" name="svc[]" value="integrations" onchange="toggleSvc()"> Tech &amp; Integrations
+          <span class="sub">Connecting your tools, Zapier/Make, third-party setups</span></label>
+      </div>
+    </div>
+
+    <!-- Funnel -->
+    <div class="svc-block" id="b-funnel">
+      <div class="svc-block-title">About your funnel</div>
+      <div class="field">
+        <label>What's the main thing you're offering on your landing page?</label>
+        <input type="text" name="funnel_offer" placeholder="E.g. Free guide, free training, quiz result, low-ticket offer, discovery call...">
+      </div>
+      <div class="field">
+        <label>Walk me through what happens after someone signs up
+          <span class="note">Thank you page, email, redirect, booking link — whatever you have in mind</span>
+        </label>
+        <textarea name="funnel_flow" placeholder="E.g. They hit a thank you page with a short video from me, get an email with the free guide, and 3 days later get invited to book a call..." style="min-height:80px"></textarea>
+      </div>
+      <div class="field">
+        <label>Any funnel pages you love the look of?
+          <span class="note">Drop links to pages that feel like your vibe — helps a lot for design</span>
+        </label>
+        <input type="text" name="funnel_inspo" placeholder="https://...">
+      </div>
+    </div>
+
+    <!-- CRM -->
+    <div class="svc-block" id="b-crm">
+      <div class="svc-block-title">About your CRM</div>
+      <div class="field">
+        <label>What do you need your CRM to do for you?
+          <span class="note">E.g. track leads, manage a sales pipeline, automate follow-ups, book appointments</span>
+        </label>
+        <textarea name="crm_needs" placeholder="E.g. I want to track every enquiry through a pipeline from first contact to signed client, and have automated reminders go out when a lead goes quiet..." style="min-height:80px"></textarea>
+      </div>
+      <div class="field">
+        <label>Do you have pipeline stages in mind?
+          <span class="note">E.g. Enquiry → Proposal → Client Won — or leave blank and we'll figure it out together</span>
+        </label>
+        <input type="text" name="crm_pipeline" placeholder="E.g. New Lead → Discovery Call → Proposal Sent → Won / Lost">
+      </div>
+    </div>
+
+    <!-- Quiz -->
+    <div class="svc-block" id="b-quiz">
+      <div class="svc-block-title">About your quiz or assessment</div>
+      <div class="field">
+        <label>What's the point of your quiz — what do you want it to do for your audience?</label>
+        <textarea name="quiz_purpose" placeholder="E.g. Help people identify which of my 3 programmes fits them best based on where they are right now..." style="min-height:70px"></textarea>
+      </div>
+      <div class="field">
+        <label>What kind of result will people get?</label>
+        <div class="opts">
+          <label><input type="radio" name="quiz_result_type" value="A score (e.g. low / medium / high)"> A score — like low / medium / high</label>
+          <label><input type="radio" name="quiz_result_type" value="A personality or archetype type"> A personality or archetype type</label>
+          <label><input type="radio" name="quiz_result_type" value="A readiness or fit rating"> A readiness or fit rating</label>
+          <label><input type="radio" name="quiz_result_type" value="A programme or offer recommendation"> A programme recommendation</label>
+          <label><input type="radio" name="quiz_result_type" value="Not sure yet"> Not sure yet — happy for your input</label>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="field">
+          <label>How many result types?</label>
+          <input type="text" name="quiz_outcomes" placeholder="E.g. 3 outcome types">
+        </div>
+        <div class="field">
+          <label>Roughly how many questions?</label>
+          <select name="quiz_q_count">
+            <option value="" disabled selected>Select...</option>
+            <option>1–5</option><option>6–10</option><option>11–15</option><option>16–20</option><option>20+</option><option>Not sure yet</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Describe each result type if you can
+          <span class="note">Name and a brief description — even rough notes help</span>
+        </label>
+        <textarea name="quiz_outcome_detail" placeholder="E.g. 1) The Starter — just beginning, point them to my foundations course. 2) The Builder — has some momentum, suggest my group programme. 3) The Grower — ready to scale, recommend 1:1..." style="min-height:90px"></textarea>
+      </div>
+      <div class="field">
+        <label>After someone gets their result, what should happen?
+          <span class="note">Tick all that apply</span>
+        </label>
+        <div class="opts">
+          <label><input type="checkbox" name="post_quiz[]" value="Show result page immediately"> Show their result straight away</label>
+          <label><input type="checkbox" name="post_quiz[]" value="Collect email before showing result"> Ask for their email before the result</label>
+          <label><input type="checkbox" name="post_quiz[]" value="Email them their personalised result"> Email them their personalised result</label>
+          <label><input type="checkbox" name="post_quiz[]" value="Send them to a booking page"> Send them to a booking page</label>
+          <label><input type="checkbox" name="post_quiz[]" value="Recommend a specific offer"> Point them to a specific offer or programme</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Automation -->
+    <div class="svc-block" id="b-automation">
+      <div class="svc-block-title">About your automations</div>
+      <div class="field">
+        <label>Describe the flows you need
+          <span class="note">What kicks off the automation, and what should happen step by step?</span>
+        </label>
+        <textarea name="automation_needs" placeholder="E.g. When someone downloads my freebie → welcome email → 3 days later a follow-up → tag based on link clicks → if no action after 7 days → re-engagement email..." style="min-height:90px"></textarea>
+      </div>
+      <div class="field">
+        <label>How many email sequences are we setting up?</label>
+        <input type="text" name="email_seq" placeholder="E.g. 1 welcome sequence (5 emails) + 1 nurture sequence (7 emails)">
+      </div>
+    </div>
+
+    <!-- Course -->
+    <div class="svc-block" id="b-course">
+      <div class="svc-block-title">About your course or programme</div>
+      <div class="field">
+        <label>Tell me about the course — what is it and how's it structured?</label>
+        <textarea name="course_desc" placeholder="E.g. My 6-week group programme 'Scale With Ease' — 6 modules, 3–4 lessons each, video content + workbooks + a private community..." style="min-height:80px"></textarea>
+      </div>
+      <div class="field">
+        <label>What needs setting up on the platform?
+          <span class="note">Tick all that apply</span>
+        </label>
+        <div class="opts">
+          <label><input type="checkbox" name="course_tasks[]" value="Upload modules and content"> Upload modules and content</label>
+          <label><input type="checkbox" name="course_tasks[]" value="Set up sales or checkout page"> Sales or checkout page</label>
+          <label><input type="checkbox" name="course_tasks[]" value="Student welcome emails"> Student welcome / onboarding emails</label>
+          <label><input type="checkbox" name="course_tasks[]" value="Community or membership area"> Community or membership area</label>
+          <label><input type="checkbox" name="course_tasks[]" value="Connect payment gateway"> Connect payment gateway</label>
+          <label><input type="checkbox" name="course_tasks[]" value="Drip content schedule"> Drip / schedule content release</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Course -->
+    <div class="svc-block" id="b-ai_course">
+      <div class="svc-block-title">About your AI course build</div>
+      <div class="field">
+        <label>What's the course topic, and who is it for?</label>
+        <textarea name="ai_course_topic" placeholder="E.g. A self-study course on mindset and confidence for female coaches who keep self-sabotaging their own sales..." style="min-height:70px"></textarea>
+      </div>
+      <div class="field">
+        <label>How many modules or lessons are you thinking?</label>
+        <input type="text" name="ai_course_size" placeholder="E.g. 4 modules, 3 lessons each, short and punchy — 10–15 mins per video">
+      </div>
+      <div class="field">
+        <label>Do you have any existing content I can work from?</label>
+        <div class="opts">
+          <label><input type="radio" name="ai_content" value="Yes — plenty (recordings, notes, PDFs, slides)"> Yes — I have recordings, notes, slides, PDFs</label>
+          <label><input type="radio" name="ai_content" value="A little — a few notes or voice memos"> A little — some notes or voice memos</label>
+          <label><input type="radio" name="ai_content" value="Nothing yet — starting from scratch"> Nothing yet — fully from scratch</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Integrations -->
+    <div class="svc-block" id="b-integrations">
+      <div class="svc-block-title">About your integrations</div>
+      <div class="field">
+        <label>What tools need to talk to each other, and what should they do?</label>
+        <textarea name="integrations_detail" placeholder="E.g. Connect Calendly to GHL so bookings auto-create contacts. Link Stripe to Kajabi for payments. Use Zapier to push Facebook lead ads into ActiveCampaign..." style="min-height:80px"></textarea>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn btn-back" onclick="go(1)">← Back</button>
+      <button type="button" class="btn btn-fwd" onclick="go(3)">Next →</button>
+    </div>
+  </div>
+
+  <!-- ── Step 3 ── -->
+  <div class="card" id="s3">
+    <div class="step-count">3 of 5</div>
+    <div class="card-heading">Your content &amp; <em>brand.</em></div>
+    <p class="card-intro">Don't worry if not everything is ready — just tell me where things are at and I'll work with what you've got.</p>
+
+    <div class="divider"><span>Your brand</span></div>
+
+    <div class="field">
+      <label>Do you have a brand kit ready? <span class="req">*</span></label>
+      <div class="opts">
+        <label><input type="radio" name="brand_kit" value="Yes — full kit (logo, colours, fonts)" required> Yes — full kit (logo, colours, fonts)</label>
+        <label><input type="radio" name="brand_kit" value="Partial — I have a logo but nothing else defined"> Partial — logo only, no defined colours or fonts yet</label>
+        <label><input type="radio" name="brand_kit" value="No — I need some guidance here"> Not really — I could use your guidance</label>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="field">
+        <label>Brand colours
+          <span class="note">Hex codes, or just describe — e.g. "dusty rose and navy"</span>
+        </label>
+        <input type="text" name="brand_colours" placeholder="E.g. #9B7EBD and warm cream">
+      </div>
+      <div class="field">
+        <label>Brand fonts (if you know them)</label>
+        <input type="text" name="brand_fonts" placeholder="E.g. Lora + Nunito">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>How would you describe the vibe of your brand?
+        <span class="note">Go with your gut — first words that come to mind</span>
+      </label>
+      <input type="text" name="brand_vibe" placeholder="E.g. warm and premium / bold and energetic / soft and nurturing / clean and confident...">
+    </div>
+
+    <div class="field">
+      <label>Where can I pick up your logo and brand assets?
+        <span class="note">Google Drive, Canva, Dropbox — any shared link works</span>
+      </label>
+      <input type="url" name="brand_assets" placeholder="https://drive.google.com/...">
+    </div>
+
+    <div class="divider"><span>Your copy &amp; written content</span></div>
+
+    <div class="field">
+      <label>How is your written content looking right now? <span class="req">*</span></label>
+      <div class="opts">
+        <label><input type="radio" name="copy_status" value="All written and ready to go" required> All written and ready to go ✨</label>
+        <label><input type="radio" name="copy_status" value="I have drafts — not quite final"> I have drafts — not quite final</label>
+        <label><input type="radio" name="copy_status" value="Not written yet — I'll send before we start"> Not written yet — I'll get it to you before we start</label>
+        <label><input type="radio" name="copy_status" value="I need help — not sure what to write"> I honestly need help — not sure what to write</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Link to your copy doc if you have one
+        <span class="note">Google Doc, Notion, Word — or leave blank and send later</span>
+      </label>
+      <input type="url" name="copy_link" placeholder="https://docs.google.com/...">
+    </div>
+
+    <div class="divider"><span>Your lead magnet</span></div>
+
+    <div class="field">
+      <label>What's your lead magnet?
+        <span class="note">Leave blank if this isn't part of your project</span>
+      </label>
+      <input type="text" name="lead_magnet_name" placeholder="E.g. Free guide: 5 Steps to Your First 1K Month / Free mini training / Free quiz / Checklist...">
+    </div>
+
+    <div class="field">
+      <label>Where is the content for it right now?</label>
+      <div class="opts">
+        <label><input type="radio" name="lm_status" value="Done and ready — I'll send the link"> Done and ready — I'll send the link</label>
+        <label><input type="radio" name="lm_status" value="Written but not designed yet"> Written but not designed yet</label>
+        <label><input type="radio" name="lm_status" value="Still working on it"> Still working on it</label>
+        <label><input type="radio" name="lm_status" value="Not started yet"> Haven't started yet</label>
+        <label><input type="radio" name="lm_status" value="Not applicable"> Not part of my project</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Link to your lead magnet content
+        <span class="note">Google Drive, Canva, Dropbox — or drop a link later</span>
+      </label>
+      <input type="url" name="lm_link" placeholder="https://...">
+    </div>
+
+    <div class="field">
+      <label>Anything else content-wise I should know?
+        <span class="note">Videos, PDFs, images, testimonials, voice notes — anything floating around</span>
+      </label>
+      <textarea name="content_notes" placeholder="E.g. I have 5 client testimonial screenshots I'll send over. My welcome video is recorded and on Loom. I want to use my existing Canva templates for the guide design..." style="min-height:75px"></textarea>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn btn-back" onclick="go(2)">← Back</button>
+      <button type="button" class="btn btn-fwd" onclick="go(4)">Next →</button>
+    </div>
+  </div>
+
+  <!-- ── Step 4 ── -->
+  <div class="card" id="s4">
+    <div class="step-count">4 of 5</div>
+    <div class="card-heading">The tech side — <em>your platforms.</em></div>
+    <p class="card-intro">Tell me what tools you're using. After you submit I'll send you a safe way to share access — please don't put any passwords in this form.</p>
+
+    <div class="notice">
+      <span class="ic">🔒</span>
+      <span><strong>Keep it safe:</strong> Never share passwords in a form. Once you submit, I'll send you instructions to add me as an admin or team member inside each platform directly. This is the secure way to do it — and it keeps you in full control of your accounts.</span>
+    </div>
+
+    <div class="field">
+      <label>Which platforms are you using? <span class="req">*</span>
+        <span class="note">Tick everything — even if you're not sure it's relevant</span>
+      </label>
+      <div class="opts">
+        <label><input type="checkbox" name="platforms[]" value="GoHighLevel (GHL)"> GoHighLevel (GHL)</label>
+        <label><input type="checkbox" name="platforms[]" value="Kajabi"> Kajabi</label>
+        <label><input type="checkbox" name="platforms[]" value="ActiveCampaign"> ActiveCampaign</label>
+        <label><input type="checkbox" name="platforms[]" value="Mailchimp"> Mailchimp</label>
+        <label><input type="checkbox" name="platforms[]" value="ConvertKit / Kit"> ConvertKit / Kit</label>
+        <label><input type="checkbox" name="platforms[]" value="Teachable"> Teachable</label>
+        <label><input type="checkbox" name="platforms[]" value="Thinkific"> Thinkific</label>
+        <label><input type="checkbox" name="platforms[]" value="ClickFunnels"> ClickFunnels</label>
+        <label><input type="checkbox" name="platforms[]" value="Systeme.io"> Systeme.io</label>
+        <label><input type="checkbox" name="platforms[]" value="WordPress"> WordPress</label>
+        <label><input type="checkbox" name="platforms[]" value="Calendly"> Calendly</label>
+        <label><input type="checkbox" name="platforms[]" value="Stripe or other payment platform"> Stripe or other payment platform</label>
+        <label><input type="checkbox" name="platforms[]" value="Zapier"> Zapier</label>
+        <label><input type="checkbox" name="platforms[]" value="Make (Integromat)"> Make (Integromat)</label>
+        <label><input type="checkbox" name="platforms[]" value="Other"> Something else — I'll say below</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Anything else not on the list?</label>
+      <input type="text" name="other_platforms" placeholder="E.g. Typeform, ThriveCart, ManyChat, Zoom...">
+    </div>
+
+    <div class="field">
+      <label>Do you have a website or domain?</label>
+      <div class="opts">
+        <label><input type="radio" name="has_domain" value="Yes — domain and live website"> Yes — domain and a live website</label>
+        <label><input type="radio" name="has_domain" value="Yes — domain, no website yet"> Yes — domain, no website yet</label>
+        <label><input type="radio" name="has_domain" value="No — I need to get one"> No — I'll need to get one</label>
+        <label><input type="radio" name="has_domain" value="Not applicable"> Not needed for this project</label>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="field">
+        <label>Your domain URL (if you have one)</label>
+        <input type="url" name="domain_url" placeholder="https://yourdomain.com">
+      </div>
+      <div class="field">
+        <label>Who hosts your domain?
+          <span class="note">E.g. GoDaddy, Namecheap — leave blank if unsure</span>
+        </label>
+        <input type="text" name="domain_host" placeholder="E.g. Namecheap, GoDaddy...">
+      </div>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn btn-back" onclick="go(3)">← Back</button>
+      <button type="button" class="btn btn-fwd" onclick="go(5)">Next →</button>
+    </div>
+  </div>
+
+  <!-- ── Step 5 ── -->
+  <div class="card" id="s5">
+    <div class="step-count">5 of 5</div>
+    <div class="card-heading">Nearly there — <em>just a few last things.</em></div>
+    <p class="card-intro">This helps me understand how to work with you and what success actually looks like for you.</p>
+
+    <div class="two-col">
+      <div class="field">
+        <label>When are you hoping to get started?</label>
+        <input type="text" name="start_date" placeholder="E.g. ASAP, early June, end of the month...">
+      </div>
+      <div class="field">
+        <label>Any hard deadlines?</label>
+        <input type="text" name="deadline" placeholder="E.g. Must be live before my launch on 15 July">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>How do you like to communicate? <span class="req">*</span></label>
+      <div class="opts">
+        <label><input type="radio" name="comms" value="WhatsApp" required> WhatsApp — quick and easy</label>
+        <label><input type="radio" name="comms" value="Email"> Email — I prefer it in writing</label>
+        <label><input type="radio" name="comms" value="Voxer"> Voxer voice messages</label>
+        <label><input type="radio" name="comms" value="Video call (Zoom / Google Meet)"> Video calls — I like to talk things through</label>
+        <label><input type="radio" name="comms" value="Whatever works"> I'm easy — whatever works best for you</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>How available will you be during the project?
+        <span class="note">Honest answers help me plan realistic timelines around your feedback and approvals</span>
+      </label>
+      <div class="opts">
+        <label><input type="radio" name="availability" value="Very available — I check messages daily"> Very available — I check in daily</label>
+        <label><input type="radio" name="availability" value="Moderate — a few times a week"> A few times a week</label>
+        <label><input type="radio" name="availability" value="Quite busy right now"> Quite busy — might take a day or two to respond</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>What does a total win look like for you?
+        <span class="note">Imagine we've finished and you're thrilled — what's happened?</span>
+      </label>
+      <textarea name="success_vision" placeholder="E.g. I wake up to new enquiries in my inbox. My funnel is running while I sleep. The tech feels solid and I feel proud to send people to my pages..."></textarea>
+    </div>
+
+    <div class="field">
+      <label>Is there anything you're worried about or want me to know?
+        <span class="note">Previous bad experiences, things that are really important to you, anything at all</span>
+      </label>
+      <textarea name="concerns" placeholder="E.g. I've been burned by a VA before who disappeared halfway through. Keeping me updated matters a lot to me. Or I'm totally new to this and feeling a bit nervous about the tech..." style="min-height:75px"></textarea>
+    </div>
+
+    <div class="field">
+      <label>How did you find me?</label>
+      <input type="text" name="referral" placeholder="E.g. LinkedIn, Facebook, a friend referred me, Instagram...">
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn btn-back" onclick="go(4)">← Back</button>
+      <button type="button" class="btn btn-send" id="sub-btn" onclick="submitForm()">Send it over ✓</button>
+    </div>
+  </div>
+
+  </form>
+
+  <!-- Done -->
+  <div id="done">
+    <div class="done-icon">✓</div>
+    <h2>You're all done!</h2>
+    <p>Thank you so much for taking the time to fill this in. I'll go through everything carefully and be in touch within 1–2 business days.</p>
+    <p style="margin-top:8px">So excited to get started on this with you. 🎉</p>
+    <div class="sig">— Hira, Digitally Empower</div>
+  </div>
+
+</div>
+
+<script>
+// ── Replace these before going live ──
+const FORMSPREE  = 'https://formspree.io/f/YOUR_FORM_ID';
+const GS_WEBHOOK = 'YOUR_APPS_SCRIPT_URL';
+// ─────────────────────────────────────
+
+let cur = 1;
+const N = 5;
+
+function go(n) {
+  document.getElementById('s'+cur).classList.remove('active');
+  const dc = document.getElementById('d'+cur);
+  dc.classList.remove('active');
+  if (n > cur) {
+    dc.classList.add('done');
+    for(let i=cur;i<n;i++) {
+      const l=document.getElementById('l'+i);
+      if(l) l.classList.add('done');
+    }
+  } else {
+    dc.classList.remove('done');
+  }
+  cur = n;
+  document.getElementById('s'+cur).classList.add('active');
+  document.getElementById('d'+cur).classList.remove('done');
+  document.getElementById('d'+cur).classList.add('active');
+  document.getElementById('prog').style.width=(cur/N*100)+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function toggleSvc() {
+  ['funnel','crm','quiz','automation','course','ai_course','integrations'].forEach(id=>{
+    const cb=document.querySelector(`input[value="${id}"]`);
+    const bl=document.getElementById('b-'+id);
+    if(bl) bl.classList.toggle('open', cb&&cb.checked);
+  });
+}
+
+document.querySelectorAll('.opts input').forEach(inp=>{
+  inp.addEventListener('change',()=>{
+    const g=inp.closest('.opts');
+    if(inp.type==='radio') g.querySelectorAll('label').forEach(l=>l.classList.remove('on'));
+    inp.parentElement.classList.toggle('on',inp.checked);
+  });
+});
+
+function getData(){
+  const d={},f=document.getElementById('f');
+  for(const el of f.elements){
+    if(!el.name)continue;
+    if(el.type==='checkbox'){if(!d[el.name])d[el.name]=[];if(el.checked)d[el.name].push(el.value);}
+    else if(el.type==='radio'){if(el.checked)d[el.name]=el.value;}
+    else d[el.name]=el.value;
+  }
+  return d;
+}
+
+async function submitForm(){
+  const d=getData();
+  if(!d.name||!d.email||!d.biz_name){alert('Please complete your name, business name and email in Step 1.');go(1);return;}
+  if(!d['svc[]']||d['svc[]'].length===0){alert('Please select at least one service in Step 2.');go(2);return;}
+  const btn=document.getElementById('sub-btn');
+  btn.textContent='Sending…';btn.disabled=true;
+  try{await fetch(FORMSPREE,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(d)});}catch(e){console.warn(e);}
+  try{await fetch(GS_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d),mode:'no-cors'});}catch(e){console.warn(e);}
+  document.querySelectorAll('.card').forEach(c=>c.style.display='none');
+  document.querySelector('.dots').style.display='none';
+  document.querySelector('.bar-track').style.display='none';
+  document.getElementById('done').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+<!--
+SETUP:
+1. Formspree: formspree.io → New Form → copy ID → replace YOUR_FORM_ID
+2. Google Sheets: Extensions → Apps Script → paste below → Deploy as Web App → replace YOUR_APPS_SCRIPT_URL
+
+function doPost(e) {
+  const s = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const d = JSON.parse(e.postData.contents);
+  s.appendRow([new Date(), ...Object.values(d)]);
+  return ContentService.createTextOutput('OK');
+}
+
+3. Host: netlify.com/drop OR add as a GHL page
+-->
+</body>
+</html>
